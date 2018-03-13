@@ -138,7 +138,7 @@ cd ~
 perl -pi -e '$_ = "#!/usr/bin/python\n" if $. == 1' aws
 ```
 
-5. Create zip package
+5. Create deployment package .zip file
 ```
 zip -g package.zip hugo
 zip -g package.zip aws
@@ -148,7 +148,7 @@ zip -r9 ~/package.zip *
 ```
 
 ## Credits
-Thanks to the following resources: 
+Big thanks to the following resources: 
 * https://alestic.com/2016/11/aws-lambda-awscli/
 * https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html
 * http://bezdelev.com/post/hugo-aws-lambda-static-website/
