@@ -94,36 +94,11 @@ You should create a role for running this Lambda function. Give it the following
 ## Installing Lambda function
 1. Create a new lambda function
 2. Upload package.zip
+3. Set handler as 'lambda_function.lambda_handler'
 3. Add S3 triggers for 'ObjectCreated' & 'ObjectRemoved' against your input bucket
-3. Configure lambda function as below
-
-
-```{
-    "Functions": [
-        {
-            "TracingConfig": {
-                "Mode": "PassThrough"
-            },
-            "VpcConfig": {
-                "SubnetIds": [],
-                "SecurityGroupIds": []
-            },
-            "Description": "Generate and publish hugo site",
-            "Timeout": 60,
-            "Handler": "lambda_function.lambda_handler",
-            "MemorySize": 128,
-            "Role": "arn:aws:iam::7023841xxxx:role/hugoLambdaExecRole",
-
-            "Runtime": "python3.6",
-
-            "CodeSize": 18075466,
-            "FunctionName": "hugoPyLambda",
-            "LastModified": "2018-03-13T18:48:48.424+0000",
-            "Version": "$LATEST"
-        }
-    ]
-}
-```
+3. Configure lambda function to use the IAM role above
+4. 60 Second timeout
+5. Runtime = python3.6
 
 &nbsp;
 
