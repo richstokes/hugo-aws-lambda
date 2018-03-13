@@ -23,7 +23,7 @@ Once set up, updating your Hugo website with this infrastructure is as simple as
 &nbsp;
 ## Requirements
 1. Input bucket should be named 'input.yourwebsite.com'
-2. Store your raw hugo files under s3://input.yourwebsite.com/hugo
+2. Store/sync your raw hugo files to s3://input.yourwebsite.com/hugo
 3. Website bucket should be named 'yourwebsite.com'
 4. Create a redirect website bucket for 'www.yourwebsite.com' if needed
 
