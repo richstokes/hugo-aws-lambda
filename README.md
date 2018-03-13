@@ -10,6 +10,7 @@ This public S3 bucket will be enabled for static website hosting.
 
 *Bonus fun!* Point a cloudfront instance at your static website hosting bucket to quickly and easily deploy your Hugo site with the AWS CDN.
 
+&nbsp;
 
 ## Example deployment
 Once set up, updating your Hugo website with this infrastructure is as simple as running an S3 sync command. e.g.
@@ -17,7 +18,7 @@ Once set up, updating your Hugo website with this infrastructure is as simple as
 `aws s3 sync --delete /home/user/hugoSite/ s3://input.yourwebsite.com`
 
 
-
+&nbsp;
 ## Requirements
 1. Input bucket should be named 'input.yourwebsite.com'
 2. Website bucket should be named 'yourwebsite.com'
@@ -86,7 +87,7 @@ You should create a role for running this Lambda function. Give it the following
     ]
 }
 ```
-
+&nbsp;
 
 ## Installing Lambda function
 1. Create a new lambda function
@@ -121,10 +122,14 @@ You should create a role for running this Lambda function. Give it the following
 }
 ```
 
+&nbsp;
+
 ## Building the package yourself
 package.zip contains the hugo executable, the AWS CLI program and lambda_function.py
 
-You can recreate this package 
+You can recreate this package by
+
+&nbsp;
 
 ## Credits
 Thanks to the following sources: 
