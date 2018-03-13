@@ -173,4 +173,10 @@ zip -r9 ~/package.zip *
 ```
 
 ## Credits
-Thanks to the following sources: 
+Thanks to the following resources: 
+* https://alestic.com/2016/11/aws-lambda-awscli/
+* https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html
+* http://bezdelev.com/post/hugo-aws-lambda-static-website/
+* https://medium.com/@bezdelev/how-to-test-a-python-aws-lambda-function-locally-with-pycharm-run-configurations-6de8efc4b206
+
+
