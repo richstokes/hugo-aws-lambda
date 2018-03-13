@@ -17,14 +17,15 @@ This public S3 bucket will be enabled for static website hosting.
 ## Example deployment
 Once set up, updating your Hugo website with this infrastructure is as simple as running an S3 sync command. e.g.
 
-`aws s3 sync --delete /home/user/hugoSite/ s3://input.yourwebsite.com`
+`aws s3 sync --delete /home/user/hugoSite/ s3://input.yourwebsite.com/hugo`
 
 
 &nbsp;
 ## Requirements
 1. Input bucket should be named 'input.yourwebsite.com'
-2. Website bucket should be named 'yourwebsite.com'
-3. Create a redirect website bucket for 'www.yourwebsite.com' if needed
+2. Store your raw hugo files under s3://input.yourwebsite.com/hugo
+3. Website bucket should be named 'yourwebsite.com'
+4. Create a redirect website bucket for 'www.yourwebsite.com' if needed
 
 
 
