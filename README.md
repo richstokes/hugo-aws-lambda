@@ -8,7 +8,7 @@ This is a packaged AWS Lambda function that will watch an S3 'inputBucket' for c
 
 This public S3 bucket will be enabled for static website hosting.
 
-Bonus fun: Point a cloudfront instance at your static website hosting bucket to quickly and easily deploy your Hugo site with the AWS CDN!
+*Bonus fun!* Point a cloudfront instance at your static website hosting bucket to quickly and easily deploy your Hugo site with the AWS CDN.
 
 
 ## Example deployment
@@ -17,11 +17,75 @@ Once set up, updating your Hugo website with this infrastructure is as simple as
 `aws s3 sync --delete /home/user/hugoSite/ s3://input.yourwebsite.com`
 
 
+
 ## Requirements
 1. Input bucket should be named 'input.yourwebsite.com'
 2. Website bucket should be named 'yourwebsite.com'
+3. Create a redirect website bucket for 'www.yourwebsite.com' if needed
+
+
 
 ### IAM Role
+You should create a role for running this Lambda function. Give it the following two policies:
+
+1. AWSLambdaBasicExecutionRole
+2. Create Inline policy with the following access:-
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets"
+            ],
+            "Resource": [
+                "arn:aws:s3:::*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::input.yourwebsite.com"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::input.yourwebsite.com/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::yourwebsite.com"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:DeleteObject",
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:GetObjectAcl",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": [
+                "arn:aws:s3:::yourwebsite.com/*"
+            ]
+        }
+    ]
+}
+```
 
 
 ## Installing Lambda function
@@ -44,7 +108,7 @@ Once set up, updating your Hugo website with this infrastructure is as simple as
             "Timeout": 60,
             "Handler": "lambda_function.lambda_handler",
             "MemorySize": 128,
-            "Role": "arn:aws:iam::7023841xxxxx:role/hugoLambdaExecRole",
+            "Role": "arn:aws:iam::7023841xxxx:role/hugoLambdaExecRole",
 
             "Runtime": "python3.6",
 
@@ -56,6 +120,11 @@ Once set up, updating your Hugo website with this infrastructure is as simple as
     ]
 }
 ```
+
+## Building the package yourself
+package.zip contains the hugo executable, the AWS CLI program and lambda_function.py
+
+You can recreate this package 
 
 ## Credits
 Thanks to the following sources: 
