@@ -103,7 +103,7 @@ You should create a role for running this Lambda function. Give it the following
 &nbsp;
 
 ## Building the deployment package yourself
-package.zip contains the hugo executable, the AWS CLI program and lambda_function.py
+package.zip contains the hugo executable, the AWS CLI program and lambda_function.py as well as the usual python libraries. 
 
 You can recreate this package with the following:
 &nbsp;
