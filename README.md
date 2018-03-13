@@ -125,6 +125,7 @@ source MYVENV/bin/activate
 ```
 wget https://github.com/gohugoio/hugo/releases/download/v0.37.1/hugo_0.37.1_Linux-64bit.tar.gz
 tar xfvz hugo_0.37.1_Linux-64bit.tar.gz
+mv hugo ~
 ```
 4. Install AWS CLI
 ```
