@@ -130,7 +130,6 @@ mv hugo ~
 4. Install AWS CLI
 ```
 pip install awscli
-which aws
 cp ~/MYVENV/bin/aws ~
 cd ~
 ```
