@@ -1,5 +1,7 @@
 # serverlessHugo
-Deploy a hugo site automatically with AWS Lambda
+Deploy a hugo site automatically with AWS Lambda. 
+
+&nbsp;
 
 ![Diagram](https://raw.githubusercontent.com/richstokes/serverlessHugo/master/diagram.png)
 
@@ -92,7 +94,8 @@ You should create a role for running this Lambda function. Give it the following
 ## Installing Lambda function
 1. Create a new lambda function
 2. Upload package.zip
-3. Configure as below
+3. Add S3 triggers for 'ObjectCreated' & 'ObjectRemoved' against your input bucket
+3. Configure lambda function as below
 
 
 ```{
@@ -124,12 +127,50 @@ You should create a role for running this Lambda function. Give it the following
 
 &nbsp;
 
-## Building the package yourself
+## Building the deployment package yourself
 package.zip contains the hugo executable, the AWS CLI program and lambda_function.py
 
-You can recreate this package by
-
+You can recreate this package with the following:
 &nbsp;
+
+1. Spin up an EC2 Amazon Linux instance
+2. Install python3.6
+```
+wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tar.xz
+tar xJf Python-3.6.0.tar.xz
+cd Python-3.6.0 && ./configure && make && sudo make install
+```
+3. Create virtualenv for Python 3.6
+```
+sudo pip install --upgrade virtualenv
+virtualenv -p python3 MYVENV
+source MYVENV/bin/activate
+```
+4. Download & extract Hugo's Linux x64 package
+```
+wget https://github.com/gohugoio/hugo/releases/download/v0.37.1/hugo_0.37.1_Linux-64bit.tar.gz
+tar xfvz hugo_0.37.1_Linux-64bit.tar.gz
+```
+4. Install AWS CLI
+```
+pip install awscli
+which aws
+cp ~/MYVENV/bin/aws ~
+cd ~
+```
+5. Modify AWS CLI shebang to play nice on Lambda
+```
+perl -pi -e '$_ = "#!/usr/bin/python\n" if $. == 1' aws
+```
+
+5. Create zip package
+```
+zip -g package.zip hugo
+zip -g package.zip aws
+zip -g package.zip lambda_function.py
+cd $VIRTUAL_ENV/lib/python3.6/site-packages
+zip -r9 ~/package.zip *
+```
 
 ## Credits
 Thanks to the following sources: 
